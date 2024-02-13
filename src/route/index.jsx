@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import Header from "../layouts/Header";
 import RegisterPage from "../pages/RegisterPage";
+import AccountPage from "../pages/AccountPage";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,22 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
+      {
+        path: "/account/:subpage?",
+        element: <AccountPage />,
+      },
+      // {
+      //   path: "/account/booking",
+      //   element: <AccountPage />,
+      // },
+      // {
+      //   path: "/account/place",
+      //   element: <AccountPage />,
+      // },
+      // {
+      //   path: "/account/payment",
+      //   element: <AccountPage />,
+      // },
     ],
   },
 ]);
