@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../feature/auth/contexts/AuthContext";
 import validateLogin from "../feature/auth/validations/validate-login";
 import { toast } from "react-toastify";
+import Input from "../component/input";
 
 export default function LoginPage() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
+
+  const { user } = useAuth();
 
   const handleSubmitForm = async (e) => {
     try {
@@ -19,10 +22,7 @@ export default function LoginPage() {
       await login(input);
       toast.success("login success");
     } catch (err) {
-      console.log(err);
-      // toast.error(err.response?.data.msg);
-      toast.error(err.response?.data);
-      // console.log(err.response);
+      toast.error(err.response?.data.msg);
     }
   };
 
@@ -37,19 +37,25 @@ export default function LoginPage() {
       <div className="mb-64">
         <h1 className="text-4xl text-center mb-4">Login</h1>
         <form className="max-w-md mx-auto" onSubmit={handleSubmitForm}>
-          <input
+          <Input
             type="email"
             name="email"
             placeholder="E-mail"
             onChange={handleChangeInput}
+            value={input.email}
+            errorMessage={error.email}
           />
-          <input
+          <Input
             type="password"
             placeholder="password"
             name="password"
             onChange={handleChangeInput}
+            value={input.password}
+            errorMessage={error.password}
           />
+
           <button className="primary">Login</button>
+
           <div className="text-center py-2">
             Don't have an account yet?
             <Link className="underline font-bold" to={"/register"}>

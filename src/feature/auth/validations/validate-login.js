@@ -3,7 +3,7 @@ import validate from "../../../utils/validate";
 
 const loginSchema = Joi.object({
   email: Joi.string().required().messages({
-    "string.empty": "email",
+    "string.empty": "email is require",
   }),
   password: Joi.string().required().messages({
     "string.empty": "password is require",

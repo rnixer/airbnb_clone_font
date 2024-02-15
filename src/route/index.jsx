@@ -5,6 +5,8 @@ import LoginPage from "../pages/LoginPage";
 import Header from "../layouts/Header";
 import RegisterPage from "../pages/RegisterPage";
 import AccountPage from "../pages/AccountPage";
+import RedirectIfAuthenticated from "../feature/auth/components/RedirectIfAuthenticated";
+import PlaceFormPage from "../pages/PlaceFormPage";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <RedirectIfAuthenticated>
+            <LoginPage />
+          </RedirectIfAuthenticated>
+        ),
       },
       {
         path: "/register",
@@ -32,18 +38,10 @@ const router = createBrowserRouter([
         path: "/account/:subpage?",
         element: <AccountPage />,
       },
-      // {
-      //   path: "/account/booking",
-      //   element: <AccountPage />,
-      // },
-      // {
-      //   path: "/account/place",
-      //   element: <AccountPage />,
-      // },
-      // {
-      //   path: "/account/payment",
-      //   element: <AccountPage />,
-      // },
+      {
+        path: "/account/places/account/places/new",
+        element: <PlaceFormPage />,
+      },
     ],
   },
 ]);

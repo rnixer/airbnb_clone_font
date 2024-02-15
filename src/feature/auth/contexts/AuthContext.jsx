@@ -40,7 +40,7 @@ export default function AuthContextProvider({ children }) {
 
   const logout = () => {
     setUser(null);
-    clearToken();
+    userApi.clearToken();
   };
 
   return (
