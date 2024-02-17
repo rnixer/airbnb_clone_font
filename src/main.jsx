@@ -4,14 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import AuthContextProvider from "./feature/auth/contexts/AuthContext.jsx";
 import "react-toastify/dist/ReactToastify.css";
-import PostContextProvider from "./contexts/PlaceContext.jsx";
+import PlaceContextProvider from "./contexts/PlaceContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <AuthContextProvider>
-    <PostContextProvider>
+    <PlaceContextProvider>
       <App />
-    </PostContextProvider>
+    </PlaceContextProvider>
   </AuthContextProvider>
   // </React.StrictMode>
 );

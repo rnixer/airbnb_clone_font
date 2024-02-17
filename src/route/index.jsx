@@ -6,7 +6,7 @@ import Header from "../layouts/Header";
 import RegisterPage from "../pages/RegisterPage";
 import AccountPage from "../pages/AccountPage";
 import RedirectIfAuthenticated from "../feature/auth/components/RedirectIfAuthenticated";
-import PlaceFormPage from "../pages/PlaceFormPage";
+import PlaceFormPage from "../pages/places/PlaceFormPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +40,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/account/places/account/places/new",
+        element: <PlaceFormPage />,
+      },
+      {
+        path: "/account/places/account/places/:placeId",
         element: <PlaceFormPage />,
       },
     ],

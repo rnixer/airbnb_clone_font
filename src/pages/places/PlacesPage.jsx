@@ -1,28 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Input from "../component/input";
-import { useState } from "react";
-import Peaks from "./Peaks";
-import axios from "axios";
+
+import PlaceList from "./placeList";
 
 export default function PlacesPage() {
-  // console.log(action);
-
-  // async function addPhotoByLink(e) {
-  //   e.preventDefault();
-  //   await axios.post("/places/upload-by-link", {
-  //     link: photoLink,
-  //   });
-  // }
-
   return (
     <div>
-      {/* {action !== "new" && (
-      
-      )} */}
-
-      <div className="text-center">
+      <div className="text-center mb-10">
         <Link //inline-flex = display : inline-block
           className="flex inline-flex bg-red text-white py-2 px-6 rounded-full"
           to={"account/places/new"}
@@ -44,10 +28,7 @@ export default function PlacesPage() {
           Add new place
         </Link>
       </div>
-
-      {/* {action === "new" && (
-       
-      )} */}
+      <PlaceList />
     </div>
   );
 }

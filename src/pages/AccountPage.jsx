@@ -4,13 +4,14 @@ import Spinner from "../component/Spinner";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import PlacesPage from "./PlacesPage";
+import PlacesPage from "./places/PlacesPage";
 
 export default function AccountPage() {
   const { user, initialLoading, logout } = useAuth();
 
   let { subpage } = useParams();
-  console.log(subpage);
+  // console.log(subpage);
+  // console.log(useParams());
   if (subpage === undefined) {
     subpage = "profile";
   }
