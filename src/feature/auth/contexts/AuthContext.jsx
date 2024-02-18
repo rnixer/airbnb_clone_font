@@ -10,6 +10,7 @@ const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [initialLoading, setInitialLoading] = useState(true);
+  // const [onFetch, setOnFetch] = useState(false);
 
   useEffect(() => {
     if (userApi.getToken()) {
@@ -37,6 +38,7 @@ export default function AuthContextProvider({ children }) {
     const res = await authApi.login(credential);
     setUser(res.data.user);
     userApi.storeToken(res.data.accessToken);
+    // setOnFetch((c) => !c);
   };
 
   const logout = () => {

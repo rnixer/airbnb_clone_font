@@ -5,12 +5,12 @@ import { useAuth } from "../feature/auth/contexts/AuthContext";
 import validateLogin from "../feature/auth/validations/validate-login";
 import { toast } from "react-toastify";
 import Input from "../component/input";
+import { usePlace } from "../contexts/PlaceContext";
 
 export default function LoginPage() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
-
-  const { user } = useAuth();
+  const { setOnFetch } = usePlace();
 
   const handleSubmitForm = async (e) => {
     try {
@@ -20,6 +20,8 @@ export default function LoginPage() {
         return setError(validateError);
       }
       await login(input);
+      setOnFetch((c) => !c);
+
       toast.success("login success");
     } catch (err) {
       toast.error(err.response?.data.msg);
