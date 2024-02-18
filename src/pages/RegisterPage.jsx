@@ -78,7 +78,7 @@ export default function RegisterPage() {
             onChange={handleChangeInput}
             errorMessage={error.confirmPassword}
           />
-          <button className="primary">Register</button>
+          <button className="primary  hover:bg-hv">Register</button>
           <div className="text-center py-2">
             Don't have an account yet?{" "}
             <Link className="underline font-bold" to={"/login"}>

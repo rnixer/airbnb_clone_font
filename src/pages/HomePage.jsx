@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ModelHomePage from "../component/ModelHomePage";
+import ModelHomePage from "./all-places/ModelHomePage";
 import { usePlace } from "../contexts/PlaceContext";
 import AllPlacesItem from "./all-places/AllPlacesItem";
 

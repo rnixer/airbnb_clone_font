@@ -310,11 +310,17 @@ export default function PlaceFormPage() {
           />
           <div>
             {isEdit ? (
-              <button onClick={handleOnEdit} className="primary my-4">
+              <button
+                onClick={handleOnEdit}
+                className="primary my-4 hover:bg-hv"
+              >
                 Save change
               </button>
             ) : (
-              <button onClick={handleOnCreate} className="primary my-4">
+              <button
+                onClick={handleOnCreate}
+                className="primary my-4  hover:bg-hv"
+              >
                 Save
               </button>
             )}

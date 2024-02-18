@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../feature/auth/contexts/AuthContext";
+import { usePlace } from "../contexts/PlaceContext";
 
 export default function Header() {
-  // const {
-  //   user: { name },
-  // } = useAuth();
-
+  const { checkIn_date, checkOut_date, num_guests } = usePlace();
   const { user } = useAuth();
 
   return (
@@ -31,13 +29,16 @@ export default function Header() {
         </Link>
 
         <div className="flex border border-gray-300 rounded-full py-2 px-4 gap-4 shadow-md shadow-gray-300 ">
-          <div>Anywhere</div>
+          <div className="font-medium">Check-out date:</div>
+          <span>{checkIn_date}</span>
           <div className="border-l border-gray-300"></div>
-          <div>Any week</div>
+          <div className="font-medium">Check-in date:</div>{" "}
+          <span>{checkOut_date}</span>
           <div className="border-l border-gray-300"></div>
-          <div>Add guests</div>
-          <div className="border-l border-gray-300"></div>
-          <button className="text-gray-500">
+          <div className="font-medium">number of guests:</div>{" "}
+          <span>{num_guests}</span>
+          {/* <div className="border-l border-gray-300"></div> */}
+          {/* <button className="text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -52,7 +53,7 @@ export default function Header() {
                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
 
         <Link

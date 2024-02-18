@@ -17,10 +17,12 @@ export default function PlaceItem({ myPlace }) {
     }
   };
 
-  const handleToEditPage = async (id) => {
+  const handleToEditPage = (id) => {
     try {
       navigate(`/account/places/account/places/${id}`);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

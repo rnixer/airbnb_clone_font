@@ -5,9 +5,11 @@ import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import PlacesPage from "./places/PlacesPage";
+import { usePlace } from "../contexts/PlaceContext";
 
 export default function AccountPage() {
   const { user, initialLoading, logout } = useAuth();
+  const { setCheckIn_date, setCheckOut_date, setNum_guests } = usePlace();
 
   let { subpage } = useParams();
   // console.log(subpage);
@@ -31,6 +33,13 @@ export default function AccountPage() {
     }
     return classes;
   }
+
+  const handleOnLogout = () => {
+    setCheckIn_date();
+    setCheckOut_date();
+    setNum_guests();
+    logout();
+  };
 
   return (
     <div>
@@ -107,7 +116,10 @@ export default function AccountPage() {
       {subpage === "profile" && (
         <div className="text-center max-w-lg mx-auto">
           Logged in as {user.name} {user.email} <br></br>
-          <button className="primary max-w-sm mt-2" onClick={logout}>
+          <button
+            className="primary max-w-sm mt-2 hover:bg-hv"
+            onClick={handleOnLogout}
+          >
             Logout
           </button>
         </div>

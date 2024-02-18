@@ -8,7 +8,7 @@ export default function PlacesPage() {
     <div>
       <div className="text-center mb-10">
         <Link //inline-flex = display : inline-block
-          className="flex inline-flex bg-red text-white py-2 px-6 rounded-full"
+          className="flex inline-flex bg-red text-white py-2 px-6 rounded-full hover:bg-hv"
           to={"account/places/new"}
         >
           <svg

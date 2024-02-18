@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import { usePlace } from "../contexts/PlaceContext";
-import { useEffect } from "react";
+import { usePlace } from "../../contexts/PlaceContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function ModelHomePage() {
   const navigate = useNavigate();
   const {
-    Sreach,
     setConditionBooking,
     setCheckIn_date,
     checkIn_date,
@@ -17,19 +14,12 @@ export default function ModelHomePage() {
     num_guests,
     setNum_guests,
   } = usePlace();
-  //   useEffect(() => {
-  //     const { checkIn_date, checkOut_date, num_guests } = Sreach;
-  //     console.log(Sreach);
-  //   }, []);
 
   const handleOnSreach = () => {
     if (checkIn_date && checkOut_date && num_guests) {
       setConditionBooking((c) => !c);
-      //   Sreach.current.checkIn_date = checkIn_date;
-      //   Sreach.current.checkOut_date = checkOut_date;
-      //   Sreach.current.num_guests = num_guests;
-      //   console.log(Sreach.current.value);
-      navigate("/account/places/account/places/new");
+
+      navigate("/");
     } else {
       toast.error(
         "Please enter your check-in , check-out date and number of your guests."

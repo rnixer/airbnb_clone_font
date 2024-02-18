@@ -1,9 +1,14 @@
 import React from "react";
-import { useState } from "react";
-import ModelHomePage from "../../component/ModelHomePage";
+import { useNavigate } from "react-router-dom";
 
 export default function AllPlacesItem({ place }) {
-  const { property_name, image, description, nightly_price, address } = place;
+  const { property_name, image, description, nightly_price, address, id } =
+    place;
+
+  const navigate = useNavigate();
+  const handleOnBooking = (id) => {
+    navigate(`/bookingPage/${id}`);
+  };
 
   return (
     <>
@@ -49,8 +54,11 @@ export default function AllPlacesItem({ place }) {
               {nightly_price} bath
             </span>{" "}
             per night
-            <button className="text-2xl ml-10 font-bold px-5 py-1 border rounded-2xl bg-red text-white hover:bg-hv hover:border-gray-800">
-              booking
+            <button
+              onClick={() => handleOnBooking(id)}
+              className="text-xl ml-10 px-12 py-1 border rounded-2xl bg-red text-white hover:bg-hv"
+            >
+              Booking
             </button>
           </div>
         </div>

@@ -7,6 +7,9 @@ import RegisterPage from "../pages/RegisterPage";
 import AccountPage from "../pages/AccountPage";
 import RedirectIfAuthenticated from "../feature/auth/components/RedirectIfAuthenticated";
 import PlaceFormPage from "../pages/places/PlaceFormPage";
+import ProtectedRoute from "../feature/auth/components/ProtectedRoute";
+import BookingPage from "../pages/BookingPage";
+import PaymentPage from "../pages/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +23,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+
+        element: (
+          <ProtectedRoute>
+            <HomePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -45,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "/account/places/account/places/:placeId",
         element: <PlaceFormPage />,
+      },
+      {
+        path: "/bookingPage/:placeId",
+        element: <BookingPage />,
+      },
+      {
+        path: "/payment",
+        element: <PaymentPage />,
       },
     ],
   },

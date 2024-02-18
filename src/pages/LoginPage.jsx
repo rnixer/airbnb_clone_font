@@ -54,7 +54,7 @@ export default function LoginPage() {
             errorMessage={error.password}
           />
 
-          <button className="primary">Login</button>
+          <button className="primary  hover:bg-hv">Login</button>
 
           <div className="text-center py-2">
             Don't have an account yet?

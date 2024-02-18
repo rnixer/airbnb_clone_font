@@ -3,6 +3,7 @@ import { useEffect, useState, createContext, useContext } from "react";
 import * as authApi from "../../../api/auth";
 import * as userApi from "../../../utils/local-storage";
 import { toast } from "react-toastify";
+import { usePlace } from "../../../contexts/PlaceContext";
 
 const AuthContext = createContext();
 
