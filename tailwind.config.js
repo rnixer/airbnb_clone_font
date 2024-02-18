@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         red: "#ef4444",
+        hv: "#db2929",
       },
     },
   },

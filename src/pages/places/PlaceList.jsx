@@ -3,11 +3,11 @@ import PlaceItem from "./placeItem";
 import { usePlace } from "../../contexts/PlaceContext";
 
 export default function PlaceList() {
-  const { places } = usePlace();
+  const { myPlaces } = usePlace();
   return (
     <div className="flex flex-col gap-10">
-      {places.map((place) => (
-        <PlaceItem key={place.id} place={place} />
+      {myPlaces.map((myPlace) => (
+        <PlaceItem key={myPlace.id} myPlace={myPlace} />
       ))}
     </div>
   );

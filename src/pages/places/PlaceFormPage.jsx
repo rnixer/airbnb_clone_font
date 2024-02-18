@@ -11,14 +11,14 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import defaultPicture from "../../assets/blank.png";
 export default function PlaceFormPage() {
-  const { editPlace, places, createPlace, setOnFetch } = usePlace();
+  const { editPlace, myPlaces, createPlace, setOnFetch } = usePlace();
   const [isEdit, setIsEdit] = useState(false);
   // const [isEditPic, setIsEdit] = useState(false);
 
   const { placeId } = useParams();
   const navigate = useNavigate();
 
-  const a = places.find((e) => e.id == placeId);
+  const a = myPlaces.find((e) => e.id == placeId);
 
   const [property_name, setProperty_name] = useState(a?.property_name);
   const [address, setAddress] = useState(a?.address);
@@ -104,9 +104,9 @@ export default function PlaceFormPage() {
     try {
       e.preventDefault();
       if (
-        !property_name.trim() &&
-        !address.trim() &&
-        !description.trim() &&
+        !property_name &&
+        !address &&
+        !description &&
         !num_guests &&
         !nightly_price &&
         !mobile_promptpay &&
@@ -115,7 +115,7 @@ export default function PlaceFormPage() {
         return toast.error("please enter anything");
       }
 
-      if (!property_name.trim() || !nightly_price || !mobile_promptpay) {
+      if (!property_name || !nightly_price || !mobile_promptpay) {
         return toast.error(
           "property must have please property name and nightly price and mobile promptpay"
         );
@@ -148,6 +148,7 @@ export default function PlaceFormPage() {
       setLoading(true);
       await createPlace(formData);
       toast.success("create place success");
+      setOnFetch((c) => !c);
       navigate("/account/places");
     } catch (error) {
       toast.error(error.response?.data.msg);

@@ -8,7 +8,8 @@ import { useEffect } from "react";
 export const PlaceContext = createContext();
 
 export default function PostContextProvider({ children }) {
-  const [places, setPlaces] = useState([]);
+  const [myPlaces, setMyPlaces] = useState([]);
+  const [allPlaces, setAllPlaces] = useState([]);
   const [onFetch, setOnFetch] = useState(false);
 
   const createPlace = async (formData) => {
@@ -18,7 +19,14 @@ export default function PostContextProvider({ children }) {
   useEffect(() => {
     postApi
       .getAllMyPlace()
-      .then((res) => setPlaces(res.data.places))
+      .then((res) => setMyPlaces(res.data.myPlaces))
+      .catch((err) => console.log(err));
+  }, [onFetch]);
+
+  useEffect(() => {
+    postApi
+      .getAllPlace()
+      .then((res) => setAllPlaces(res.data.places))
       .catch((err) => console.log(err));
   }, [onFetch]);
 
@@ -32,7 +40,14 @@ export default function PostContextProvider({ children }) {
 
   return (
     <PlaceContext.Provider
-      value={{ createPlace, places, deletePlace, setOnFetch, editPlace }}
+      value={{
+        createPlace,
+        myPlaces,
+        deletePlace,
+        setOnFetch,
+        editPlace,
+        allPlaces,
+      }}
     >
       {children}
     </PlaceContext.Provider>
