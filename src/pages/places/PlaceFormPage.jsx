@@ -9,7 +9,6 @@ import Spinner from "../../component/Spinner";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import defaultPicture from "../../assets/blank.png";
 export default function PlaceFormPage() {
   const { editPlace, myPlaces, createPlace, setOnFetch } = usePlace();
   const [isEdit, setIsEdit] = useState(false);

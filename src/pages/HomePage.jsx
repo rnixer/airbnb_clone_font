@@ -5,19 +5,16 @@ import AllPlacesItem from "./all-places/AllPlacesItem";
 
 export default function HomePage() {
   const { allPlaces } = usePlace();
-  const [conditionBooking, setConditionBooking] = useState(false);
+  const { conditionBooking } = usePlace();
 
   return (
     <>
-      {!conditionBooking ? (
-        <ModelHomePage />
-      ) : (
-        <div className="flex flex-col gap-10 mt-12">
-          {allPlaces.map((place) => (
-            <AllPlacesItem key={place.id} place={place} />
-          ))}
-        </div>
-      )}
+      {!conditionBooking && <ModelHomePage />}
+      <div className="flex flex-col gap-10 mt-12">
+        {allPlaces.map((place) => (
+          <AllPlacesItem key={place.id} place={place} />
+        ))}
+      </div>
     </>
   );
 }

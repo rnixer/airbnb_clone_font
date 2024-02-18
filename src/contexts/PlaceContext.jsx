@@ -4,6 +4,7 @@ import { createContext } from "react";
 import * as postApi from "../api/place";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 export const PlaceContext = createContext();
 
@@ -11,6 +12,16 @@ export default function PostContextProvider({ children }) {
   const [myPlaces, setMyPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
   const [onFetch, setOnFetch] = useState(false);
+  const [conditionBooking, setConditionBooking] = useState(false);
+
+  const [checkIn_date, setCheckIn_date] = useState("");
+  const [checkOut_date, setCheckOut_date] = useState("");
+  const [num_guests, setNum_guests] = useState("");
+
+  const Sreach = useRef({
+    checkIn_date: "",
+    checkOut_date: "",
+  });
 
   const createPlace = async (formData) => {
     await postApi.createPlace(formData);
@@ -47,6 +58,15 @@ export default function PostContextProvider({ children }) {
         setOnFetch,
         editPlace,
         allPlaces,
+        Sreach,
+        setConditionBooking,
+        conditionBooking,
+        setCheckIn_date,
+        checkIn_date,
+        checkOut_date,
+        setCheckOut_date,
+        num_guests,
+        setNum_guests,
       }}
     >
       {children}
