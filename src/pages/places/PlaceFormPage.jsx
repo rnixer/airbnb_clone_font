@@ -11,13 +11,12 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 export default function PlaceFormPage() {
   const { editPlace, myPlaces, createPlace, setOnFetch } = usePlace();
-  const [isEdit, setIsEdit] = useState(false);
-  // const [isEditPic, setIsEdit] = useState(false);
-
-  const { placeId } = useParams();
   const navigate = useNavigate();
 
+  const { placeId } = useParams();
   const a = myPlaces.find((e) => e.id == placeId);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   const [property_name, setProperty_name] = useState(a?.property_name);
   const [address, setAddress] = useState(a?.address);
@@ -201,10 +200,7 @@ export default function PlaceFormPage() {
                       className={"relative flex justify-center "}
                       onClick={() => fileInputEl.current.click()}
                     >
-                      <img
-                        src={showImage}
-                        // src={defaultPicture}
-                      />
+                      <img src={showImage} alt="image" />
                       <button
                         className="absolute top-1 right-5 text-2xl font-black "
                         onClick={(e) => {
@@ -225,7 +221,7 @@ export default function PlaceFormPage() {
                       className="relative flex justify-center "
                       onClick={() => fileInputEl.current.click()}
                     >
-                      <img src={image} />
+                      <img src={image} alt="image" />
                       <button
                         className="absolute top-1 right-5 text-2xl font-black "
                         onClick={(e) => {

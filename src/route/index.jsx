@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         element: <BookingPage />,
       },
       {
-        path: "/payment",
+        path: "/payment/:placeId",
         element: <PaymentPage />,
       },
     ],

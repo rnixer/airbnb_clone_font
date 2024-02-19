@@ -6,7 +6,6 @@ import AllPlacesItem from "./all-places/AllPlacesItem";
 export default function HomePage() {
   const { allPlaces } = usePlace();
   const { conditionBooking } = usePlace();
-  const { setOnFetch } = usePlace();
 
   return (
     <>

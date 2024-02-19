@@ -25,8 +25,8 @@ export default function BookingPage() {
     return price;
   };
 
-  const handleOnPay = () => {
-    navigate("/payment");
+  const handleOnPay = (placeId) => {
+    navigate(`/payment/${placeId}`);
   };
 
   return (
@@ -73,7 +73,10 @@ export default function BookingPage() {
           {" "}
           <span className="font-bold">Total Price </span> : {totalPrice()} Bath
         </div>
-        <button className="primary hover:bg-hv" onClick={handleOnPay}>
+        <button
+          className="primary hover:bg-hv"
+          onClick={() => handleOnPay(placeId)}
+        >
           Make payment
         </button>
       </div>
