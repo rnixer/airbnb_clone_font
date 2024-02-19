@@ -1,8 +1,8 @@
 import React from "react";
-import { usePlace } from "../contexts/PlaceContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import ModelHomePage from "./all-places/ModelHomePage";
+import ModelHomePage from "../all-places/ModelHomePage";
+import { usePlace } from "../../contexts/PlaceContext";
 
 export default function BookingPage() {
   const { allPlaces, checkIn_date, checkOut_date, conditionBooking } =

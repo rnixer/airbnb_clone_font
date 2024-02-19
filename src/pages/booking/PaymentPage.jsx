@@ -1,20 +1,37 @@
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import { usePlace } from "../contexts/PlaceContext";
-import ModelHomePage from "./all-places/ModelHomePage";
+import { usePlace } from "../../contexts/PlaceContext";
+import ModelHomePage from "../all-places/ModelHomePage";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../feature/auth/contexts/AuthContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useBooking } from "../../contexts/BookingContext";
+import Spinner from "../../component/Spinner";
 
 export default function PaymentPage() {
   const [slipImage, setSlipImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const fileInputEl = useRef(null);
 
+  const navigate = useNavigate();
   const { placeId } = useParams();
-  const { conditionBooking, allPlaces, checkOut_date, checkIn_date } =
-    usePlace();
+  const {
+    conditionBooking,
+    allPlaces,
+    checkOut_date,
+    checkIn_date,
+    num_guests,
+    setOnFetch,
+  } = usePlace();
+
+  const { createBooking } = useBooking();
+
+  const { user } = useAuth();
 
   const result = allPlaces.find((e) => e.id == placeId);
-  console.log(placeId);
 
   const totalPrice = () => {
     const dateOut = new Date(checkOut_date);
@@ -27,18 +44,56 @@ export default function PaymentPage() {
     return price;
   };
 
-  const onSubmitConfirm = () => {
-    e.preventDefault();
-    console.log("*****************");
+  // console.log(checkIn_date);
+  // console.log(checkOut_date);
+  // console.log(totalPrice());
+  // console.log(slipImage);
+  // console.log(result.id);
+  // console.log(user.id);
+  // console.log(num_guests);
+
+  const handleOnConfirm = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      if (result.id) {
+        formData.append("property_id", result.id);
+      }
+      if (user.id) {
+        formData.append("user_id", user.id);
+      }
+      if (checkIn_date) {
+        formData.append("checkin_date", checkIn_date);
+      }
+      if (checkOut_date) {
+        formData.append("checkout_date", checkOut_date);
+      }
+      if (totalPrice()) {
+        formData.append("total_price", totalPrice());
+      }
+      if (slipImage) {
+        formData.append("image", slipImage);
+      }
+      if (num_guests) {
+        formData.append("num_guests", num_guests);
+      }
+      setLoading(true);
+      await createBooking(formData);
+      toast.success("Booking success");
+      setOnFetch((c) => !c);
+      navigate("/account/booking");
+    } catch (error) {
+      toast.error(error.response?.data.msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      {/* {!conditionBooking && <ModelHomePage />} */}
-      <form
-        onSubmit={onSubmitConfirm}
-        className="flex flex-col gap-4 px-5 py-8 m-auto w-2/6 max-h-2/5  bg-white border rounded-2xl"
-      >
+      {!conditionBooking && <ModelHomePage />}
+      {loading && <Spinner />}
+      <div className="flex flex-col gap-4 px-5 py-8 m-auto w-1/2   bg-white border rounded-2xl">
         <div className="font-bold text-2xl border-b w-full text-center pb-5">
           Payment
         </div>
@@ -112,8 +167,10 @@ export default function PaymentPage() {
             )}
           </div>
         </div>
-        <button className="primary mt-5 hover:bg-hv">Confirm Payment</button>
-      </form>
+        <button onClick={handleOnConfirm} className="primary mt-5 hover:bg-hv">
+          Confirm Payment
+        </button>
+      </div>
     </>
   );
 }

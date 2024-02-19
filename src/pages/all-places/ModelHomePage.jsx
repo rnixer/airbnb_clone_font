@@ -67,7 +67,7 @@ export default function ModelHomePage() {
                 value={num_guests}
                 className=""
                 onChange={(e) => setNum_guests(e.target.value)}
-                placeholder="number of guests "
+                placeholder="number of guests"
               />
             </div>
             <button onClick={handleOnSreach} className="primary">

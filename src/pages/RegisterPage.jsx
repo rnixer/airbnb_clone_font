@@ -6,6 +6,8 @@ import { useAuth } from "../feature/auth/contexts/AuthContext";
 import validateRegister from "../feature/auth/validations/validate-register";
 import { toast } from "react-toastify";
 import Input from "../component/input";
+import { useNavigate } from "react-router-dom";
+import { usePlace } from "../contexts/PlaceContext";
 
 const initial = {
   name: "",
@@ -18,6 +20,9 @@ export default function RegisterPage() {
   const [input, setInput] = useState(initial); // {firstName : 'aaa'}
   const [error, setError] = useState({});
   const { register } = useAuth();
+  const { setOnFetch, setConditionBooking } = usePlace();
+
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     try {
@@ -30,6 +35,9 @@ export default function RegisterPage() {
 
       await register(input);
       toast.success("register succuss");
+      setOnFetch((c) => !c);
+      setConditionBooking(false);
+      navigate("/");
     } catch (error) {
       if (error.response?.data.message === "EMAIL_IN_USE")
         return setError({ email: "already in use" });

@@ -8,8 +8,8 @@ import AccountPage from "../pages/AccountPage";
 import RedirectIfAuthenticated from "../feature/auth/components/RedirectIfAuthenticated";
 import PlaceFormPage from "../pages/places/PlaceFormPage";
 import ProtectedRoute from "../feature/auth/components/ProtectedRoute";
-import BookingPage from "../pages/BookingPage";
-import PaymentPage from "../pages/PaymentPage";
+import BookingPage from "../pages/booking/BookingPage";
+import PaymentPage from "../pages/booking/PaymentPage";
 
 const router = createBrowserRouter([
   {

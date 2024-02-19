@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import * as postApi from "../api/place";
+import * as placeApi from "../api/place";
 import { useContext } from "react";
 import { useEffect } from "react";
 
@@ -13,34 +13,40 @@ export default function PlaceContextProvider({ children }) {
   const [onFetch, setOnFetch] = useState(false);
   const [conditionBooking, setConditionBooking] = useState(false);
 
-  const [checkIn_date, setCheckIn_date] = useState("");
+  const currentDate = new Date();
+
+  const today = currentDate.toISOString().split("T")[0];
+  // const plusOne = currentDate.setDate(currentDate.getDate() + 1);
+  // const tomorrow = currentDate.toISOString().split("T")[0];
+
+  const [checkIn_date, setCheckIn_date] = useState(today);
   const [checkOut_date, setCheckOut_date] = useState("");
-  const [num_guests, setNum_guests] = useState("");
+  const [num_guests, setNum_guests] = useState("1");
 
   const createPlace = async (formData) => {
-    await postApi.createPlace(formData);
+    await placeApi.createPlace(formData);
   };
 
   useEffect(() => {
-    postApi
+    placeApi
       .getAllMyPlace()
       .then((res) => setMyPlaces(res.data.myPlaces))
       .catch((err) => console.log(err));
   }, [onFetch]);
 
   useEffect(() => {
-    postApi
+    placeApi
       .getAllPlace()
       .then((res) => setAllPlaces(res.data.places))
       .catch((err) => console.log(err));
   }, [onFetch]);
 
   const deletePlace = async (e) => {
-    await postApi.deleteMyPlaceById(e);
+    await placeApi.deleteMyPlaceById(e);
   };
 
   const editPlace = async (formData, id) => {
-    await postApi.editMyPlaceById(formData, id);
+    await placeApi.editMyPlaceById(formData, id);
   };
 
   // const totalPrice = () => {

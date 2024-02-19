@@ -4,6 +4,7 @@ import { useAuth } from "./feature/auth/contexts/AuthContext";
 import "./index.css";
 import Router from "./route/index";
 import axios from "axios";
+import BookingContextProvider from "./contexts/BookingContext";
 
 // axios.defaults.baseURL = "http://localhost:8777";
 
@@ -19,7 +20,9 @@ function App() {
         theme="colored"
         transition={Slide}
       />
-      <Router />
+      <BookingContextProvider>
+        <Router />
+      </BookingContextProvider>
     </>
   );
 }
