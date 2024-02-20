@@ -27,6 +27,8 @@ export default function PaymentPage() {
     setOnFetch,
   } = usePlace();
 
+  // const { setOnFetch } = useBooking();
+
   const { createBooking } = useBooking();
 
   const { user } = useAuth();
@@ -77,10 +79,13 @@ export default function PaymentPage() {
       if (num_guests) {
         formData.append("num_guests", num_guests);
       }
+      formData.append("booking_id");
+
       setLoading(true);
       await createBooking(formData);
+      // await createPayment(formData)
       toast.success("Booking success");
-      setOnFetch((c) => !c);
+      // setOnFetch((c) => !c);
       navigate("/account/booking");
     } catch (error) {
       toast.error(error.response?.data.msg);

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function PlaceItem({ myPlace }) {
-  const { property_name, image, description, id } = myPlace;
+  const { property_name, image, description, address, id } = myPlace;
   const { deletePlace, setOnFetch } = usePlace();
   const navigate = useNavigate();
   const handleOnDelete = async (id) => {
@@ -51,8 +51,31 @@ export default function PlaceItem({ myPlace }) {
             </div>
           </div>
         </div>
+        <div className="flex gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+            />
+          </svg>
+          <div className="">{address}</div>
+        </div>
+
         <div>
-          <div className="mt-3">description {description}</div>
+          <div className="mt-3 text-lg"> {description}</div>
         </div>
       </div>
     </div>

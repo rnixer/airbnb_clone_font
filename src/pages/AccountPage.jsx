@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import PlacesPage from "./places/PlacesPage";
 import { usePlace } from "../contexts/PlaceContext";
 import BookingListPage from "../pages/booking/BookingListPage";
+import PaymentConfirm from "./PaymentStatus/PaymentConfirm";
 
 export default function AccountPage() {
   const { user, initialLoading, logout } = useAuth();
@@ -127,6 +128,7 @@ export default function AccountPage() {
       )}
       {subpage === "places" && <PlacesPage />}
       {subpage === "booking" && <BookingListPage />}
+      {subpage === "payment" && <PaymentConfirm />}
     </div>
   );
 }

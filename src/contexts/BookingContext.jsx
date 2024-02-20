@@ -8,6 +8,7 @@ export const BookingContext = createContext();
 
 export default function BookingContextProvider({ children }) {
   const [bookedList, setBookedList] = useState([]);
+  // const [onFetch, setOnFetch] = useState(false);
 
   const createBooking = async (formData) => {
     await bookingApi.createBooking(formData);

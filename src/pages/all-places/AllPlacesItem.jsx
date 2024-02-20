@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useBooking } from "../../contexts/BookingContext";
 
 export default function AllPlacesItem({ place }) {
   const { property_name, image, description, nightly_price, address, id } =
