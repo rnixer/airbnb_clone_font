@@ -79,7 +79,6 @@ export default function PaymentPage() {
       if (num_guests) {
         formData.append("num_guests", num_guests);
       }
-      formData.append("booking_id");
 
       setLoading(true);
       await createBooking(formData);
