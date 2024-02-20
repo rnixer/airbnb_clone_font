@@ -6,4 +6,6 @@ export const deleteMyPlaceById = (id) => axios.delete(`/places/${id}`);
 export const editMyPlaceById = (formData, id) =>
   axios.patch(`/places/${id}`, formData);
 
-export const getAllPlace = () => axios.get("/places/all");
+// export const getAllPlace = () => axios.get("/places/all");
+export const getAllFilterPlace = (checkIn_date, checkOutDate) =>
+  axios.get(`/places/${checkIn_date}/${checkOutDate}`);

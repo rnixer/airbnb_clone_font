@@ -10,7 +10,11 @@ export default function Header() {
   return (
     <div>
       <header className="py-4 flex justify-between">
-        <Link to={"/"} href="" className="flex items-center">
+        <Link
+          to={`/${checkIn_date}/${checkOut_date}`}
+          href=""
+          className="flex items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

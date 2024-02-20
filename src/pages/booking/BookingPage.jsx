@@ -5,13 +5,13 @@ import ModelHomePage from "../all-places/ModelHomePage";
 import { usePlace } from "../../contexts/PlaceContext";
 
 export default function BookingPage() {
-  const { allPlaces, checkIn_date, checkOut_date, conditionBooking } =
+  const { allFilterPlaces, checkIn_date, checkOut_date, conditionBooking } =
     usePlace();
   const { placeId } = useParams();
 
   const navigate = useNavigate();
 
-  const result = allPlaces.find((e) => e.id == placeId);
+  const result = allFilterPlaces.find((e) => e.id == placeId);
 
   const totalPrice = () => {
     const dateOut = new Date(checkOut_date);

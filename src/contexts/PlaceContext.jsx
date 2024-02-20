@@ -9,18 +9,19 @@ export const PlaceContext = createContext();
 
 export default function PlaceContextProvider({ children }) {
   const [myPlaces, setMyPlaces] = useState([]);
-  const [allPlaces, setAllPlaces] = useState([]);
+  // const [allPlaces, setAllPlaces] = useState([]);
+  const [allFilterPlaces, setAllFilterPlaces] = useState([]);
   const [onFetch, setOnFetch] = useState(false);
   const [conditionBooking, setConditionBooking] = useState(false);
 
   const currentDate = new Date();
 
   const today = currentDate.toISOString().split("T")[0];
-  // const plusOne = currentDate.setDate(currentDate.getDate() + 1);
-  // const tomorrow = currentDate.toISOString().split("T")[0];
+  const plusOne = currentDate.setDate(currentDate.getDate() + 1);
+  const tomorrow = currentDate.toISOString().split("T")[0];
 
   const [checkIn_date, setCheckIn_date] = useState(today);
-  const [checkOut_date, setCheckOut_date] = useState("");
+  const [checkOut_date, setCheckOut_date] = useState(tomorrow);
   const [num_guests, setNum_guests] = useState("1");
 
   const createPlace = async (formData) => {
@@ -34,10 +35,19 @@ export default function PlaceContextProvider({ children }) {
       .catch((err) => console.log(err));
   }, [onFetch]);
 
+  // useEffect(() => {
+  //   placeApi
+  //     .getAllPlace()
+  //     .then((res) => setAllPlaces(res.data.places))
+  //     .catch((err) => console.log(err));
+  // }, [onFetch]);
+
   useEffect(() => {
+    console.log(checkIn_date);
+    console.log(checkOut_date);
     placeApi
-      .getAllPlace()
-      .then((res) => setAllPlaces(res.data.places))
+      .getAllFilterPlace(checkIn_date, checkOut_date)
+      .then((res) => setAllFilterPlaces(res.data.filterPlaces))
       .catch((err) => console.log(err));
   }, [onFetch]);
 
@@ -69,7 +79,9 @@ export default function PlaceContextProvider({ children }) {
         deletePlace,
         setOnFetch,
         editPlace,
-        allPlaces,
+        // allPlaces,
+        allFilterPlaces,
+        setAllFilterPlaces,
         setConditionBooking,
         conditionBooking,
         setCheckIn_date,

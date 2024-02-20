@@ -20,7 +20,7 @@ export default function PaymentPage() {
   const { placeId } = useParams();
   const {
     conditionBooking,
-    allPlaces,
+    allFilterPlaces,
     checkOut_date,
     checkIn_date,
     num_guests,
@@ -31,7 +31,7 @@ export default function PaymentPage() {
 
   const { user } = useAuth();
 
-  const result = allPlaces.find((e) => e.id == placeId);
+  const result = allFilterPlaces.find((e) => e.id == placeId);
 
   const totalPrice = () => {
     const dateOut = new Date(checkOut_date);

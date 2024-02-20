@@ -2,6 +2,7 @@ import React from "react";
 import { usePlace } from "../../contexts/PlaceContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import * as placeApi from "../../api/place";
 
 export default function ModelHomePage() {
   const navigate = useNavigate();
@@ -13,13 +14,17 @@ export default function ModelHomePage() {
     setCheckOut_date,
     num_guests,
     setNum_guests,
+    setAllFilterPlaces,
   } = usePlace();
 
-  const handleOnSreach = () => {
+  const handleOnSreach = (checkIn_date, checkOut_date) => {
     if (checkIn_date && checkOut_date && num_guests) {
       setConditionBooking((c) => !c);
-
-      navigate("/");
+      navigate(`/${checkIn_date}/${checkOut_date}`);
+      placeApi
+        .getAllFilterPlace(checkIn_date, checkOut_date)
+        .then((res) => setAllFilterPlaces(res.data.filterPlaces))
+        .catch((err) => console.log(err));
     } else {
       toast.error(
         "Please enter your check-in , check-out date and number of your guests."
@@ -70,7 +75,10 @@ export default function ModelHomePage() {
                 placeholder="number of guests"
               />
             </div>
-            <button onClick={handleOnSreach} className="primary">
+            <button
+              onClick={() => handleOnSreach(checkIn_date, checkOut_date)}
+              className="primary"
+            >
               Sreach for booking
             </button>
           </div>
