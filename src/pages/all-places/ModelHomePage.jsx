@@ -17,12 +17,14 @@ export default function ModelHomePage() {
     setAllFilterPlaces,
   } = usePlace();
 
-  const handleOnSreach = (checkIn_date, checkOut_date) => {
+  const handleOnSreach = (checkIn_date, checkOut_date, num_guests) => {
     if (checkIn_date && checkOut_date && num_guests) {
-      setConditionBooking((c) => !c);
+      // console.log("num_guests", num_guests);
+
+      setConditionBooking(true);
       navigate(`/${checkIn_date}/${checkOut_date}`);
       placeApi
-        .getAllFilterPlace(checkIn_date, checkOut_date)
+        .getAllFilterPlace(checkIn_date, checkOut_date, num_guests)
         .then((res) => setAllFilterPlaces(res.data.filterPlaces))
         .catch((err) => console.log(err));
     } else {
@@ -76,7 +78,9 @@ export default function ModelHomePage() {
               />
             </div>
             <button
-              onClick={() => handleOnSreach(checkIn_date, checkOut_date)}
+              onClick={() =>
+                handleOnSreach(checkIn_date, checkOut_date, num_guests)
+              }
               className="primary"
             >
               Sreach for booking

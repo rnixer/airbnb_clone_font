@@ -1,10 +1,12 @@
 import React from "react";
 
-export default function PaymentConfirmItem() {
+export default function PaymentConfirmItem({ payment }) {
+  const { property_name, slipImage } = payment;
+
   return (
     <div className="flex gap-10 border rounded-xl w-4/5 mx-auto px-10 py-5 ">
       <img
-        src={property.image}
+        src={slipImage}
         alt="place"
         className="text-green-500 rounded-2xl w-1/4"
       ></img>
@@ -14,7 +16,7 @@ export default function PaymentConfirmItem() {
           <h1 className="text-2xl font-bold mt-5"></h1>
         </div>
         <div>
-          <div className="mt-3">checkin_date</div>
+          <div className="mt-3">{property_name}</div>
           <div className="mt-3">total_price </div>
         </div>
       </div>

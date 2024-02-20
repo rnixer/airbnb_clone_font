@@ -3,8 +3,8 @@ import Spinner from "./component/Spinner";
 import { useAuth } from "./feature/auth/contexts/AuthContext";
 import "./index.css";
 import Router from "./route/index";
-import axios from "axios";
 import BookingContextProvider from "./contexts/BookingContext";
+import PaymentContextProvider from "./contexts/PaymentContext";
 
 // axios.defaults.baseURL = "http://localhost:8777";
 
@@ -21,7 +21,9 @@ function App() {
         transition={Slide}
       />
       <BookingContextProvider>
-        <Router />
+        <PaymentContextProvider>
+          <Router />
+        </PaymentContextProvider>
       </BookingContextProvider>
     </>
   );

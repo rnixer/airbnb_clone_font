@@ -43,10 +43,10 @@ export default function PlaceContextProvider({ children }) {
   // }, [onFetch]);
 
   useEffect(() => {
-    console.log(checkIn_date);
-    console.log(checkOut_date);
+    // console.log(checkIn_date);
+    // console.log(checkOut_date);
     placeApi
-      .getAllFilterPlace(checkIn_date, checkOut_date)
+      .getAllFilterPlace(checkIn_date, checkOut_date, num_guests)
       .then((res) => setAllFilterPlaces(res.data.filterPlaces))
       .catch((err) => console.log(err));
   }, [onFetch]);

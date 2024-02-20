@@ -7,5 +7,5 @@ export const editMyPlaceById = (formData, id) =>
   axios.patch(`/places/${id}`, formData);
 
 // export const getAllPlace = () => axios.get("/places/all");
-export const getAllFilterPlace = (checkIn_date, checkOutDate) =>
-  axios.get(`/places/${checkIn_date}/${checkOutDate}`);
+export const getAllFilterPlace = (checkIn_date, checkOutDate, num_guests) =>
+  axios.get(`/places/${checkIn_date}/${checkOutDate}/${num_guests}`);
