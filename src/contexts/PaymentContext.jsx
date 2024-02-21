@@ -13,9 +13,9 @@ export default function PaymentContextProvider({ children }) {
   //   console.log("user", user.id);
 
   useEffect(() => {
-    PaymentApi.getAllPaymentByPayerId(user.id).then((res) =>
-      setPaymentList(res.data.payment).catch((err) => console.log(err))
-    );
+    PaymentApi.getAllPaymentByPayerId(user.id)
+      .then((res) => setPaymentList(res.data.payment))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

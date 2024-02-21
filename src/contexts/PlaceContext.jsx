@@ -47,7 +47,10 @@ export default function PlaceContextProvider({ children }) {
     // console.log(checkOut_date);
     placeApi
       .getAllFilterPlace(checkIn_date, checkOut_date, num_guests)
-      .then((res) => setAllFilterPlaces(res.data.filterPlaces))
+      .then((res) => {
+        console.log(res.data.filterPlaces);
+        setAllFilterPlaces(res.data.filterPlaces);
+      })
       .catch((err) => console.log(err));
   }, [onFetch]);
 
