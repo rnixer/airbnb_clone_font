@@ -10,14 +10,20 @@ import PlaceFormPage from "../pages/places/PlaceFormPage";
 import ProtectedRoute from "../feature/auth/components/ProtectedRoute";
 import BookingPage from "../pages/booking/BookingPage";
 import PaymentPage from "../pages/booking/PaymentPage";
+import PlaceContextProvider from "../contexts/PlaceContext";
+import PaymentContextProvider from "../contexts/PaymentContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <div className="px-10 flex flex-col min-h-screen">
-        <Header />
-        <Outlet />
+        <PlaceContextProvider>
+          <PaymentContextProvider>
+            <Header />
+            <Outlet />
+          </PaymentContextProvider>
+        </PlaceContextProvider>
       </div>
     ),
     children: [
@@ -26,7 +32,9 @@ const router = createBrowserRouter([
 
         element: (
           <ProtectedRoute>
-            <HomePage />
+            <PlaceContextProvider>
+              <HomePage />
+            </PlaceContextProvider>
           </ProtectedRoute>
         ),
       },
@@ -44,11 +52,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/account/:subpage?",
-        element: <AccountPage />,
+        element: (
+          <PlaceContextProvider>
+            <AccountPage />
+          </PlaceContextProvider>
+        ),
       },
       {
         path: "/account/places/account/places/new",
-        element: <PlaceFormPage />,
+        element: (
+          <PlaceContextProvider>
+            <PlaceFormPage />,
+          </PlaceContextProvider>
+        ),
       },
       {
         path: "/account/places/account/places/:placeId",
@@ -56,7 +72,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/bookingPage/:placeId",
-        element: <BookingPage />,
+        element: (
+          <PlaceContextProvider>
+            <BookingPage />
+          </PlaceContextProvider>
+        ),
       },
       {
         path: "/payment/:placeId",

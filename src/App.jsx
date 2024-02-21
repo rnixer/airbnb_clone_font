@@ -21,9 +21,7 @@ function App() {
         transition={Slide}
       />
       <BookingContextProvider>
-        <PaymentContextProvider>
-          <Router />
-        </PaymentContextProvider>
+        <Router />
       </BookingContextProvider>
     </>
   );

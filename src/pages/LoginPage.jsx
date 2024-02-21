@@ -10,7 +10,10 @@ import { usePlace } from "../contexts/PlaceContext";
 export default function LoginPage() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
-  const { setOnFetch, setConditionBooking } = usePlace();
+  const {
+    // setOnFetch,
+    setConditionBooking,
+  } = usePlace();
 
   const handleSubmitForm = async (e) => {
     try {
@@ -20,7 +23,7 @@ export default function LoginPage() {
         return setError(validateError);
       }
       await login(input);
-      setOnFetch((c) => !c);
+      // setOnFetch((c) => !c);
       setConditionBooking(false);
       toast.success("login success");
     } catch (err) {
