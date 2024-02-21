@@ -9,7 +9,9 @@ import PlaceContextProvider from "./contexts/PlaceContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <AuthContextProvider>
-    <App />
+    <PlaceContextProvider>
+      <App />
+    </PlaceContextProvider>
   </AuthContextProvider>
   // </React.StrictMode>
 );

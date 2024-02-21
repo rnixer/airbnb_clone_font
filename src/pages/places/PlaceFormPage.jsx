@@ -269,7 +269,7 @@ export default function PlaceFormPage() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <Peaks />
+          {/* <Peaks /> */}
 
           {preInput(
             "Check in&out times, max guests",

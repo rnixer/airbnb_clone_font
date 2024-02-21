@@ -20,7 +20,7 @@ export default function RegisterPage() {
   const [input, setInput] = useState(initial); // {firstName : 'aaa'}
   const [error, setError] = useState({});
   const { register } = useAuth();
-  const { setOnFetch, setConditionBooking } = usePlace();
+  // const { setOnFetch, setConditionBooking } = usePlace();
 
   const navigate = useNavigate();
 
@@ -35,8 +35,8 @@ export default function RegisterPage() {
 
       await register(input);
       toast.success("register succuss");
-      setOnFetch((c) => !c);
-      setConditionBooking(false);
+      // setOnFetch((c) => !c);
+      // setConditionBooking(false);
       navigate("/");
     } catch (error) {
       if (error.response?.data.message === "EMAIL_IN_USE")
@@ -51,7 +51,7 @@ export default function RegisterPage() {
 
   return (
     <div className="mt-4 grow flex items-center justify-around">
-      <div className="mb-64">
+      <div className="my-64">
         <h1 className="text-4xl text-center mb-4">Register</h1>
         <form className="max-w-md mx-auto" onSubmit={handleFormSubmit}>
           <Input

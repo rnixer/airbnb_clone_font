@@ -7,11 +7,13 @@ import { usePlace } from "../../contexts/PlaceContext";
 export default function BookingPage() {
   const { allFilterPlaces, checkIn_date, checkOut_date, conditionBooking } =
     usePlace();
+  // const [result , setResult] = useState()
   const { placeId } = useParams();
 
   const navigate = useNavigate();
 
   const result = allFilterPlaces.find((e) => e.id == placeId);
+  // console.log("result", result);
 
   const totalPrice = () => {
     const dateOut = new Date(checkOut_date);

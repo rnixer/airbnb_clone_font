@@ -26,7 +26,7 @@ export default function PlaceItem({ myPlace }) {
   };
 
   return (
-    <div className="flex gap-10 border rounded-xl w-4/5 mx-auto px-10 py-5 ">
+    <div className="flex gap-10 bg-white shadow-md border rounded-xl w-4/5 mx-auto px-10 py-5 ">
       <img
         src={image}
         alt="place"

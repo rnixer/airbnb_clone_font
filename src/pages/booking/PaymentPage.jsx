@@ -24,13 +24,9 @@ export default function PaymentPage() {
     checkOut_date,
     checkIn_date,
     num_guests,
-    setOnFetch,
   } = usePlace();
 
-  // const { setOnFetch } = useBooking();
-
   const { createBooking } = useBooking();
-
   const { user } = useAuth();
 
   const result = allFilterPlaces.find((e) => e.id == placeId);
@@ -42,7 +38,6 @@ export default function PaymentPage() {
     let price =
       +result.nightly_price *
       (Math.abs(dateOut - dateIn) / (1000 * 60 * 60 * 24));
-
     return price;
   };
 
@@ -84,12 +79,13 @@ export default function PaymentPage() {
       await createBooking(formData);
       // await createPayment(formData)
       toast.success("Booking success");
-      // setOnFetch((c) => !c);
-      navigate("/account/booking");
     } catch (error) {
       toast.error(error.response?.data.msg);
     } finally {
       setLoading(false);
+      // setOnFetch((c) => !c);
+      navigate("/account/booking");
+      window.location.reload();
     }
   };
 

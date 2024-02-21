@@ -6,14 +6,17 @@ import validateLogin from "../feature/auth/validations/validate-login";
 import { toast } from "react-toastify";
 import Input from "../component/input";
 import { usePlace } from "../contexts/PlaceContext";
+import Spinner from "../component/Spinner";
 
 export default function LoginPage() {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState({});
-  const {
-    // setOnFetch,
-    setConditionBooking,
-  } = usePlace();
+  const [loading, setLoading] = useState(false);
+
+  // const {
+  //   // setOnFetch,
+  //   setConditionBooking,
+  // } = usePlace();
 
   const handleSubmitForm = async (e) => {
     try {
@@ -22,9 +25,10 @@ export default function LoginPage() {
       if (validateError) {
         return setError(validateError);
       }
+      setLoading(true);
       await login(input);
+      window.location.reload();
       // setOnFetch((c) => !c);
-      setConditionBooking(false);
       toast.success("login success");
     } catch (err) {
       toast.error(err.response?.data.msg);
@@ -38,37 +42,41 @@ export default function LoginPage() {
   const { login } = useAuth();
 
   return (
-    <div className="mt-4 grow flex items-center justify-around">
-      <div className="mb-64">
-        <h1 className="text-4xl text-center mb-4">Login</h1>
-        <form className="max-w-md mx-auto" onSubmit={handleSubmitForm}>
-          <Input
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            onChange={handleChangeInput}
-            value={input.email}
-            errorMessage={error.email}
-          />
-          <Input
-            type="password"
-            placeholder="password"
-            name="password"
-            onChange={handleChangeInput}
-            value={input.password}
-            errorMessage={error.password}
-          />
+    <>
+      {loading && <Spinner />}
 
-          <button className="primary  hover:bg-hv">Login</button>
+      <div className=" grow flex items-center justify-around">
+        <div className="my-64">
+          <h1 className="text-4xl text-center mb-4">Login</h1>
+          <form className="max-w-md mx-auto" onSubmit={handleSubmitForm}>
+            <Input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              onChange={handleChangeInput}
+              value={input.email}
+              errorMessage={error.email}
+            />
+            <Input
+              type="password"
+              placeholder="password"
+              name="password"
+              onChange={handleChangeInput}
+              value={input.password}
+              errorMessage={error.password}
+            />
 
-          <div className="text-center py-2">
-            Don't have an account yet?
-            <Link className="underline font-bold" to={"/register"}>
-              Register now
-            </Link>
-          </div>
-        </form>
+            <button className="primary  hover:bg-hv">Login</button>
+
+            <div className="text-center py-2">
+              Don't have an account yet?
+              <Link className="underline font-bold" to={"/register"}>
+                Register now
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

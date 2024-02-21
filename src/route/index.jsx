@@ -15,15 +15,31 @@ import PaymentContextProvider from "../contexts/PaymentContext";
 
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: (
+      <>
+        <RedirectIfAuthenticated>
+          <LoginPage />
+        </RedirectIfAuthenticated>
+      </>
+    ),
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
     path: "/",
     element: (
       <div className="px-10 flex flex-col min-h-screen">
-        <PlaceContextProvider>
+        <ProtectedRoute>
+          {/* <PlaceContextProvider> */}
           <PaymentContextProvider>
             <Header />
             <Outlet />
           </PaymentContextProvider>
-        </PlaceContextProvider>
+          {/* </PlaceContextProvider> */}
+        </ProtectedRoute>
       </div>
     ),
     children: [
@@ -31,40 +47,18 @@ const router = createBrowserRouter([
         path: "/:checkInDate/:checkOutDate",
 
         element: (
-          <ProtectedRoute>
-            <PlaceContextProvider>
-              <HomePage />
-            </PlaceContextProvider>
-          </ProtectedRoute>
+          // <PlaceContextProvider>
+          <HomePage />
+          // </PlaceContextProvider>
         ),
-      },
-      {
-        path: "/login",
-        element: (
-          <RedirectIfAuthenticated>
-            <LoginPage />
-          </RedirectIfAuthenticated>
-        ),
-      },
-      {
-        path: "/register",
-        element: <RegisterPage />,
       },
       {
         path: "/account/:subpage?",
-        element: (
-          <PlaceContextProvider>
-            <AccountPage />
-          </PlaceContextProvider>
-        ),
+        element: <AccountPage />,
       },
       {
         path: "/account/places/account/places/new",
-        element: (
-          <PlaceContextProvider>
-            <PlaceFormPage />,
-          </PlaceContextProvider>
-        ),
+        element: <PlaceFormPage />,
       },
       {
         path: "/account/places/account/places/:placeId",
@@ -72,11 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/bookingPage/:placeId",
-        element: (
-          <PlaceContextProvider>
-            <BookingPage />
-          </PlaceContextProvider>
-        ),
+        element: <BookingPage />,
       },
       {
         path: "/payment/:placeId",

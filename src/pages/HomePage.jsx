@@ -8,7 +8,7 @@ export default function HomePage() {
   const { allFilterPlaces } = usePlace();
   const { conditionBooking } = usePlace();
 
-  const { checkInDate, checkOutDate } = useParams();
+  // const { checkInDate, checkOutDate } = useParams();
 
   return (
     <>
