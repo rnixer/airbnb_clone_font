@@ -62,18 +62,6 @@ export default function PlaceContextProvider({ children }) {
     await placeApi.editMyPlaceById(formData, id);
   };
 
-  // const totalPrice = () => {
-  //   const dateOut = new Date(checkOut_date);
-  //   const dateIn = new Date(checkIn_date);
-
-  //   let price =
-  //     +result.nightly_price *
-  //     (Math.abs(dateOut - dateIn) / (1000 * 60 * 60 * 24));
-  //   console.log(price);
-
-  //   return price;
-  // };
-
   return (
     <PlaceContext.Provider
       value={{
