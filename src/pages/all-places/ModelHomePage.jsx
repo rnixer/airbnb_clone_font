@@ -18,9 +18,15 @@ export default function ModelHomePage() {
   } = usePlace();
 
   const handleOnSreach = (checkIn_date, checkOut_date, num_guests) => {
-    if (checkIn_date && checkOut_date && num_guests) {
-      // console.log("num_guests", num_guests);
+    if (checkOut_date <= checkIn_date) {
+      return toast.error("The checkout date must be after the check-in date.");
+    }
 
+    if (num_guests <= 0) {
+      return toast.error("The number of guest must more than 0.");
+    }
+
+    if (checkIn_date && checkOut_date && num_guests) {
       setConditionBooking(true);
       navigate(`/${checkIn_date}/${checkOut_date}`);
       placeApi

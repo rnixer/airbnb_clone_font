@@ -29,6 +29,8 @@ export default function PlaceFormPage() {
   const [loading, setLoading] = useState(false);
   const [isNewImage, setIsNewImage] = useState(false);
 
+  // const [error, setError] = useState("");
+
   function inputHeader(text) {
     return <h2 className="text-2xl mt-4">{text}</h2>;
   }
@@ -61,8 +63,25 @@ export default function PlaceFormPage() {
     }
   }, [showImage]);
   const handleOnEdit = async (e) => {
+    // console.log("property_name", property_name);
+
     try {
       e.preventDefault();
+
+      if (!/^\d{10}$/.test(mobile_promptpay)) {
+        return toast.error(
+          "Mobile promptpay number must have 10 character number Ex. 08xxxxxxxx"
+        );
+      }
+
+      if (!/^\d+$/.test(nightly_price)) {
+        return toast.error("Nightly price must be a number.");
+      }
+
+      if (num_guests <= 0) {
+        return toast.error("Max number of guests must more than 0");
+      }
+
       const formData = new FormData();
       if (property_name) {
         formData.append("property_name", property_name);
@@ -115,8 +134,22 @@ export default function PlaceFormPage() {
 
       if (!property_name || !nightly_price || !mobile_promptpay) {
         return toast.error(
-          "property must have please property name and nightly price and mobile promptpay"
+          "Property must have please property name and nightly price and mobile promptpay"
         );
+      }
+
+      if (!/^\d{10}$/.test(mobile_promptpay)) {
+        return toast.error(
+          "Mobile promptpay number must have 10 character number Ex. 08xxxxxxxx"
+        );
+      }
+
+      if (!/^\d+$/.test(nightly_price)) {
+        return toast.error("Nightly price must be a number.");
+      }
+
+      if (num_guests <= 0) {
+        return toast.error("Max number of guests must more than 0");
       }
 
       const formData = new FormData();
@@ -167,7 +200,7 @@ export default function PlaceFormPage() {
             type="text"
             placeholder="title, for example: My lovely apartment"
           ></Input>
-          {preInput("Address", "Address for your place")}
+          {preInput("Address", "Address to this place")}
 
           <Input
             value={address || ""}
@@ -201,8 +234,8 @@ export default function PlaceFormPage() {
                       onClick={() => fileInputEl.current.click()}
                     >
                       <img src={showImage} alt="image" />
-                      <button
-                        className="absolute top-1 right-5 text-2xl font-black "
+                      <div
+                        className="absolute top-1 right-5 text-2xl font-black cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -212,7 +245,7 @@ export default function PlaceFormPage() {
                         }}
                       >
                         &#10005;
-                      </button>
+                      </div>
                     </div>
                   </>
                 ) : (
@@ -222,8 +255,8 @@ export default function PlaceFormPage() {
                       onClick={() => fileInputEl.current.click()}
                     >
                       <img src={image} alt="image" />
-                      <button
-                        className="absolute top-1 right-5 text-2xl font-black "
+                      <div
+                        className="absolute top-1 right-5 text-2xl font-black cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -232,7 +265,7 @@ export default function PlaceFormPage() {
                         }}
                       >
                         &#10005;
-                      </button>
+                      </div>
                     </div>
                   </>
                 )}

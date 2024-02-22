@@ -41,7 +41,7 @@ export default function RegisterPage() {
     } catch (error) {
       if (error.response?.data.message === "EMAIL_IN_USE")
         return setError({ email: "already in use" });
-      toast.error("interal server error");
+      toast.error("Email is already in use");
     }
   };
 

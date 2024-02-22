@@ -3,7 +3,7 @@ import validate from "../../../utils/validate";
 
 const registerSchema = Joi.object({
   name: Joi.string().required().trim().messages({
-    "string.empty": "last name is require",
+    "string.empty": "Firstname and Lastname is require",
   }),
   email: Joi.string().email({ tlds: false }).required().messages({
     "alternatives.match": "invalid email address or mobile number",
