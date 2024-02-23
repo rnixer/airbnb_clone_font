@@ -68,13 +68,13 @@ export default function PlaceFormPage() {
     try {
       e.preventDefault();
 
-      if (!/^\d{10}$/.test(mobile_promptpay)) {
+      if (!/^\d{10}$/.test(mobile_promptpay.trim())) {
         return toast.error(
           "Mobile promptpay number must have 10 character number Ex. 08xxxxxxxx"
         );
       }
 
-      if (!/^\d+$/.test(nightly_price)) {
+      if (!/^\d+$/.test(nightly_price.trim())) {
         return toast.error("Nightly price must be a number.");
       }
 
@@ -138,13 +138,13 @@ export default function PlaceFormPage() {
         );
       }
 
-      if (!/^\d{10}$/.test(mobile_promptpay)) {
+      if (!/^\d{10}$/.test(mobile_promptpay.trim())) {
         return toast.error(
           "Mobile promptpay number must have 10 character number Ex. 08xxxxxxxx"
         );
       }
 
-      if (!/^\d+$/.test(nightly_price)) {
+      if (!/^\d+$/.test(nightly_price.trim())) {
         return toast.error("Nightly price must be a number.");
       }
 

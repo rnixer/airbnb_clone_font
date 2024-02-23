@@ -13,11 +13,6 @@ export default function LoginPage() {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // const {
-  //   // setOnFetch,
-  //   setConditionBooking,
-  // } = usePlace();
-
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
@@ -32,6 +27,8 @@ export default function LoginPage() {
       toast.success("login success");
     } catch (err) {
       toast.error(err.response?.data.msg);
+    } finally {
+      setLoading(false);
     }
   };
 
